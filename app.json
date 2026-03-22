@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "اطلبني",
+    "slug": "atlobni",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A2463"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.atlobni.app",
+      "buildNumber": "1"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0A2463"
+      },
+      "package": "com.atlobni.app",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "owner": "atlobni",
+    "extra": {
+      "eas": {
+        "projectId": "5f0ccb12-873e-480d-97f9-e618bef7869c"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5f0ccb12-873e-480d-97f9-e618bef7869c"
+    }
+  }
+}

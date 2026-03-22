@@ -1,0 +1,373 @@
+// ─── قائمة التخصصات في المتجر ──────────────────────────────
+export const STORE_CATS = [
+  { id:'elec',    label:'الكهرباء',  icon:'⚡', color:'#0043B0', bg:'#E6F0FF', img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70' },
+  { id:'plumb',   label:'السباكة',   icon:'💧', color:'#5B2D8E', bg:'#F0EAFF', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70' },
+  { id:'hvac',    label:'التكييف',   icon:'❄️', color:'#0A7A3C', bg:'#E6F7EE', img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70' },
+  { id:'fire',    label:'الحريق',    icon:'🔥', color:'#B83200', bg:'#FFF0F0', img:'https://cdn.salla.sa/WxOwP/LjR0VieekqHnZTYDjovTkV1VeERw0cokGVWIM9Qm.jpg' },
+  { id:'civil',   label:'المدني',    icon:'🏗️', color:'#0043B0', bg:'#E6F0FF', img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70' },
+  { id:'elv',     label:'ELV',       icon:'📡', color:'#B05200', bg:'#FFF0E0', img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70' },
+  { id:'elev',    label:'المصاعد',   icon:'🛗', color:'#0A7A3C', bg:'#E6F7EE', img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=300&q=70' },
+  { id:'garden',  label:'الحدائق',   icon:'🌿', color:'#0A7A3C', bg:'#E6F7EE', img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70' },
+  { id:'parking', label:'المواقف',   icon:'🅿️', color:'#0043B0', bg:'#E6F0FF', img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70' },
+  { id:'clean',   label:'النظافة',   icon:'🧹', color:'#0A7A3C', bg:'#E6F7EE', img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70' },
+  { id:'tools',   label:'الأدوات',   icon:'🔧', color:'#B05200', bg:'#FFF0E0', img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70' },
+  { id:'safety',  label:'السلامة',   icon:'🦺', color:'#0A7A3C', bg:'#E6F7EE', img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70' },
+];
+
+const BASE_PRICES = { elec:120,plumb:85,hvac:220,fire:95,civil:65,elv:180,elev:350,garden:75,parking:55,clean:40,tools:95,safety:60 };
+export function getItemPrice(catId,i){const b=BASE_PRICES[catId]||100;const m=[1,1.5,2,0.7,0.9,1.3,1.8,0.6,1.1,2.5,0.8,1.4,1.6,0.75,1.2];return Math.round(b*(m[i%m.length]||1));}
+export function getPartPrice(catId,i){const b=(BASE_PRICES[catId]||100)*0.6;const m=[1,1.8,2.5,0.7,1.3,0.9,1.6,2.1,0.5,1.4,1.1,0.8];return Math.round(b*(m[i%m.length]||1));}
+
+// ─── المنتجات المميزة ─────────────────────────────────────
+export const STORE_ITEMS = [
+  {id:1, name:'قاطع MCB 16A',code:'MCB-1P-16A',price:45,cat:'elec',stars:4,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+  {id:2, name:'فلتر هواء G4',code:'FILT-G4-595',price:85,cat:'hvac',stars:5,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+  {id:3, name:'ختم ميكانيكي مضخة',code:'MECH-SEAL',price:230,cat:'plumb',stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+  {id:4, name:'كاشف دخان بصري',code:'DET-SMOKE',price:65,cat:'fire',stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+  {id:5, name:'محرك مروحة 1.5kW',code:'MOTOR-1.5KW',price:680,cat:'hvac',stars:3,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+  {id:6, name:'كابل كهربائي 4×4',code:'CABLE-4C-4',price:120,cat:'elec',stars:5,img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=70'},
+  {id:7, name:'بطارية 12V 100AH',code:'BATTERY-12V',price:320,cat:'elec',stars:4,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+  {id:8, name:'صمام كرة 25مم',code:'VLV-BALL-25',price:55,cat:'plumb',stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+  {id:9, name:'خوذة سلامة بيضاء',code:'HELMET-SAFETY',price:35,cat:'safety',stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+  {id:10,name:'غاز تبريد R410A',code:'GAS-R410A',price:145,cat:'hvac',stars:5,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+];
+
+// ─── المنتجات المنزلية الموسّعة ──────────────────────────
+export const HOME_PRODUCTS = {
+
+  elec: [
+    {id:'he01',name:'قاطع كهربائي منزلي 16A',desc:'للمنازل والشقق - تركيب سهل',price:35,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'he02',name:'بريزة مزدوجة مع USB',desc:'منفذان USB 3.1A + حماية صواعق',price:38,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'he03',name:'مفتاح إضاءة لمسي ذكي',desc:'زجاج مقسى - WiFi - يعمل بالهاتف',price:65,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'he04',name:'لمبة LED 12W E27 ضوء نهاري',desc:'6500K - توفير 80% طاقة - 15000 ساعة',price:12,stars:5,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'he05',name:'لمبة LED 9W E27 ضوء دافئ',desc:'3000K - مثالية لغرف النوم',price:10,stars:4,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'he06',name:'سبوت LED 7W مدمج',desc:'للأسقف المعلقة - IP44 مقاوم للرطوبة',price:20,stars:4,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'he07',name:'وصلة كهربائية 5 منافذ 3م',desc:'مع مفتاح رئيسي وحماية من الارتفاع',price:45,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'he08',name:'شريط LED 5م RGB+W',desc:'للديكور مع ريموت تحكم 44 زر',price:65,stars:4,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'he09',name:'UPS منزلي 1000VA',desc:'لأجهزة الكمبيوتر والراوتر والكاميرات',price:280,stars:4,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'he10',name:'شاحن سريع GaN 65W',desc:'USB-C لشحن اللابتوب والهاتف معاً',price:55,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'he11',name:'كابل تمديد 10م 5 منافذ',desc:'مع حماية من الجهد الزائد - 2500W',price:55,stars:4,img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=70'},
+    {id:'he12',name:'مفتاح دهليز مع جرس',desc:'بإضاءة LED ليلية - أبيض فاخر',price:42,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'he13',name:'قاطع تسرب ELCB 30mA',desc:'حماية من الصعق - إلزامي للحمامات',price:85,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'he14',name:'علبة توزيع كهرباء 8 مخرج',desc:'مع غطاء شفاف - للتمديدات الداخلية',price:28,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'he15',name:'شريط لد ذكي WiFi 10م',desc:'يتحكم به من الهاتف - ألوان لا نهاية',price:95,stars:5,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+  
+    // الغرف
+        {id:'er01',name:'مفتاح إضاءة غرفة نوم أحادي',desc:'زجاج مقسى أبيض - LED مؤشر',price:18,stars:4,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'er02',name:'بريزة غرفة نوم مع USB-C',desc:'منفذان USB + 3.1A شحن سريع',price:42,stars:5,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'er03',name:'ثريا LED سقف 24W',desc:'ضوء دافئ+بارد - ريموت - 3 ألوان',price:145,stars:5,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        {id:'er04',name:'مصباح طاولة LED قابل للتعتيم',desc:'لمس - 3 درجات إضاءة - USB شحن',price:95,stars:5,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        // الصالة
+        {id:'es01',name:'لوحة مفاتيح صالة 3 مفاتيح',desc:'زجاج فاخر - LED - أبيض/أسود',price:65,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'es02',name:'مفتاح تكييف مع تايمر',desc:'شاشة LCD - درجة الحرارة - 7 أيام',price:88,stars:4,room:'الصالة',img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+        {id:'es03',name:'ثريا كريستال للصالة 60W',desc:'LED - ريموت - قابلة للتعتيم',price:485,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        {id:'es04',name:'بريزة صالة 4 منافذ + USB',desc:'مع غطاء واقٍ للأطفال',price:48,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'es05',name:'شريط LED خلفي للتلفاز 3م',desc:'RGB+W - WiFi - يتغير مع الصوت',price:75,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        // الحمام
+        {id:'eb01',name:'مفتاح مروحة حمام مع مؤقت',desc:'يطفئ بعد 10-30 دقيقة تلقائياً',price:35,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'eb02',name:'قاطع ELCB حمام 16A 30mA',desc:'حماية من الصعق الكهربائي - إلزامي',price:92,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+        {id:'eb03',name:'مصباح LED حمام مقاوم للرطوبة',desc:'IP44 - 12W - ضوء نهاري',price:38,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        {id:'eb04',name:'مروحة شفط حمام هادئة',desc:'18W - 150م³/ساعة - IP44',price:78,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+        // المطبخ
+        {id:'ek01',name:'بريزة مطبخ مقاومة للبخار',desc:'IP44 - مع غطاء - 16A',price:45,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'ek02',name:'مصباح تحت الخزانة LED',desc:'شريط 50سم - يضيء سطح العمل',price:55,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        {id:'ek03',name:'مفتاح مروحة شفط مطبخ',desc:'مع مؤشر LED - 3 سرعات',price:28,stars:4,room:'المطبخ',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        // المدخل
+        {id:'ee01',name:'مفتاح جرس لاسلكي مع سماعة',desc:'نغمات متعددة - يصل 300م',price:42,stars:4,room:'المدخل',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'ee02',name:'ضوء خارجي LED مع حساس حركة',desc:'IP65 - يعمل 8-12 ساعة',price:88,stars:5,room:'المدخل',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+  ],
+
+  plumb: [
+    {id:'hp01',name:'خلاط حمام أحادي - كروم فاخر',desc:'بيضة دوارة 35مم - سهل التركيب',price:145,stars:5,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+    {id:'hp02',name:'خلاط مطبخ كروم رافع',desc:'فوهة قابلة للسحب - دوران 360°',price:185,stars:5,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+    {id:'hp03',name:'دش يد 5 وضعيات',desc:'خرطوم ستانلس 1.5م - مضاد للتكلس',price:95,stars:4,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+    {id:'hp04',name:'فلتر مياه للمطبخ 5 مراحل',desc:'RO + كربون + UV - 100 جالون/يوم',price:420,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hp05',name:'سخان مياه كهربائي 80L',desc:'عزل ممتاز - ترموستات - ضمان 5 سنوات',price:850,stars:4,img:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&q=70'},
+    {id:'hp06',name:'صافي صرف حمام بدون مسامير',desc:'تصميم مسطح - سهل التنظيف - كروم',price:38,stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+    {id:'hp07',name:'مزيل تسرب أنابيب إيبوكسي',desc:'يعمل تحت الماء - يتصلب 5 دقائق',price:32,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hp08',name:'مضخة تعزيز ضغط 280W',desc:'للشقق العلوية - صامتة - تلقائية',price:420,stars:4,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'hp09',name:'خرطوم توصيل مياه ستانلس',desc:'مقاوم للضغط 16bar - 50سم',price:28,stars:4,img:'https://images.unsplash.com/photo-1565190939947-76b1bbe8cb8e?w=300&q=70'},
+    {id:'hp10',name:'علبة تسليك بيارة 50م',desc:'رأس حلزوني قابل للتبديل',price:185,stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+    {id:'hp11',name:'محبس ماء رئيسي ربع دورة',desc:'3/4 بوصة - نحاس ثقيل',price:45,stars:5,img:'https://images.unsplash.com/photo-1565190939947-76b1bbe8cb8e?w=300&q=70'},
+    {id:'hp12',name:'مرحاض ذكي بمقعد دافئ',desc:'غسيل أمامي وخلفي - جفاف بالهواء',price:1250,stars:5,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+    {id:'hp13',name:'عداد ماء رقمي مع إشارة',desc:'يراقب الاستهلاك ويكشف التسرب',price:95,stars:4,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hp14',name:'شريط تيفلون عبوة 10 لفات',desc:'10م×12مم - احترافي سميك',price:15,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hp15',name:'طقم إصلاح صنبور شامل',desc:'جوانات، مسامير، أوتار - لجميع الأحجام',price:55,stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+  
+    // الحمام
+        {id:'pb01',name:'مغسلة حمام أبيض مع طارمة',desc:'50×40سم - بورسلان - مثبت جدار',price:285,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'pb02',name:'صنبور مغسلة كروم أحادي',desc:'بيضة دوارة 35مم - خرافة منع',price:135,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'pb03',name:'خلاط دش حمام كروم',desc:'مع حامل دش + خرطوم 1.5م',price:185,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+        {id:'pb04',name:'مرحاض فاصلة منخفض الصوت',desc:'زراعة كاملة - دورتان ماء 3/6L',price:485,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+        {id:'pb05',name:'سيفون أرضية حمام كروم',desc:'قطر 110مم - سداد حشرات',price:55,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'pb06',name:'شلال دش علوي دائري',desc:'قطر 25سم - أنماط رش متعددة',price:145,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+        {id:'pb07',name:'مرآة حمام مع إضاءة LED',desc:'60×80سم - ضد الضباب - لمس',price:385,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'pb08',name:'حنفية أرضية للبانيو',desc:'كروم فاخر - مع فائض',price:285,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        // المطبخ
+        {id:'pk01',name:'صنبور مطبخ بخرطوم سحب',desc:'دوران 360° - كروم - رأسان رش',price:225,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'pk02',name:'حوض مطبخ ستانلس مزدوج',desc:'80×50سم - مع سيفون - صامت',price:345,stars:4,room:'المطبخ',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'pk03',name:'فلتر ماء تحت الحوض 3 مراحل',desc:'500L/يوم - فلاتر قابلة للاستبدال',price:185,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+        {id:'pk04',name:'سخان مياه لحظي للمطبخ',desc:'بدون خزان - 5L/دقيقة - ترموستات',price:285,stars:4,room:'المطبخ',img:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&q=70'},
+        // السخانات
+        {id:'ph01',name:'سخان شمسي 200L فراغي',desc:'لا يحتاج كهرباء - ضغط عالي',price:1850,stars:5,room:'السطح',img:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&q=70'},
+        {id:'ph02',name:'سخان كهربائي 50L - تايمر',desc:'برمجة يومية - توفير 40% طاقة',price:680,stars:4,room:'السطح',img:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&q=70'},
+        {id:'ph03',name:'ترموستات سخان المياه',desc:'استبدال مباشر - حماية من الارتفاع',price:35,stars:4,room:'الخدمات',img:'https://images.unsplash.com/photo-1565190939947-76b1bbe8cb8e?w=300&q=70'},
+        {id:'ph04',name:'خزان مياه 1000L HDPE',desc:'مقاوم للأشعة UV - بدون طحالب',price:485,stars:5,room:'السطح',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+  ],
+
+  hvac: [
+    {id:'hh01',name:'فلتر هواء مكيف يونيفرسال',desc:'لجميع الأجهزة - قابل للغسيل - يدوم 3 سنوات',price:45,stars:5,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+    {id:'hh02',name:'فلتر HEPA للمكيف المركزي',desc:'يزيل 99.97% من الجسيمات الدقيقة',price:85,stars:5,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+    {id:'hh03',name:'منظف كويل مكيف بالرغوة',desc:'500ml - لا يحتاج شطف - مضاد للعفن',price:38,stars:4,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hh04',name:'جهاز قياس درجة حرارة ورطوبة',desc:'شاشة رقمية مع تخزين 24 ساعة',price:65,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hh05',name:'مرطب هواء أولتراسونيك 4L',desc:'نظام التبخير البارد - صامت - للغرف الكبيرة',price:220,stars:5,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+    {id:'hh06',name:'مروحة سقف 56 بوصة مع إضاءة',desc:'LED + ريموت كنترول - 3 سرعات',price:380,stars:4,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'hh07',name:'مصفى تصريف مكيف 3م',desc:'PVC مرن - قطر 16مم - مع كوع',price:22,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hh08',name:'ريموت كنترول شامل للمكيفات',desc:'يدعم أكثر من 1500 موديل عالمي',price:75,stars:4,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'hh09',name:'معطر هواء أتوماتيكي بمستشعر',desc:'يعمل كل 30 دقيقة - يدوم 60 يوم',price:55,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hh10',name:'مرواح كهربائية صناعية 18 بوصة',desc:'للمستودعات والمطابخ - 3 سرعات',price:185,stars:4,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'hh11',name:'مكيف نافذة 1 طن بارد/ساخن',desc:'ترموستات رقمي - تنقية هواء مدمجة',price:1350,stars:4,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+    {id:'hh12',name:'جهاز تنقية هواء HEPA H13',desc:'يزيل الغبار والعفن والروائح - غرفة 40م²',price:480,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hh13',name:'ترموستات برمجي للمكيف',desc:'7 أيام قابلة للبرمجة - توفير 30% طاقة',price:145,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hh14',name:'معطر سيارة تهوية فاخر',desc:'روائح فرنسية 4 قطع متنوعة',price:28,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+  
+    // الغرف
+        {id:'ha01',name:'مكيف سبليت 1.5 طن إنفيرتر',desc:'A+++ - برمجة 7 أيام - تنقية هواء',price:2850,stars:5,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+        {id:'ha02',name:'فتحة هواء تكييف مع تنظيم',desc:'30×30سم - ألمنيوم - قابل التعديل',price:38,stars:4,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'ha03',name:'ترموستات ذكي WiFi',desc:'تحكم من الهاتف - توفير 30% طاقة',price:165,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'ha04',name:'مروحة سقف صامتة 52 بوصة',desc:'مع إضاءة - DC موفر - بدون صوت',price:425,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+        // الحمام
+        {id:'hba01',name:'شفاط حمام مدمج مع إضاءة',desc:'IP44 - 95م³/ساعة - صامت جداً',price:145,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+        {id:'hba02',name:'مدفأة حمام مرآة',desc:'500W - مع مرآة - IP44 - 3 أحجام',price:285,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+        // المطبخ
+        {id:'hk01',name:'شفاط مطبخ 90سم تلسكوبي',desc:'900م³/ساعة - مصابيح LED - 3 سرعات',price:785,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+        {id:'hk02',name:'فلتر شحوم شفاط 57×47',desc:'ألمنيوم - قابل للغسيل - لجميع الماركات',price:65,stars:4,room:'المطبخ',img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+        // منقيات
+        {id:'hq01',name:'منقي هواء HEPA+UV 50م²',desc:'يزيل فيروسات وجراثيم + فلتر كربون',price:585,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+        {id:'hq02',name:'مزيل رطوبة 20L/يوم',desc:'للأقبية والمناطق الرطبة',price:485,stars:4,room:'الخدمات',img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+        {id:'hq03',name:'جهاز تلطيف هواء بالماء',desc:'3 سرعات - بدون مكثف - يبرد 5°C',price:185,stars:4,room:'الصالة',img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+  ],
+
+  fire: [
+    {id:'hf01',name:'كاشف دخان منزلي 10V',desc:'إنذار 85dB - بطارية تدوم 10 سنوات',price:55,stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hf02',name:'طفاية حريق 1kg مسحوق جاف',desc:'للمطابخ والمنازل - سهلة الاستخدام',price:65,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hf03',name:'طفاية حريق CO2 2kg',desc:'لأجهزة الكهرباء - لا تتلف الأجهزة',price:180,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hf04',name:'بطانية حريق كيتشن 100×100',desc:'مقاومة لـ 550°C - صندوق تخزين مدمج',price:65,stars:4,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hf05',name:'إضاءة طوارئ LED 3 ساعات',desc:'شحن تلقائي - تضيء فور انقطاع الكهرباء',price:95,stars:4,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'hf06',name:'كاشف أول أكسيد الكربون',desc:'إنذار مبكر صوتي ومرئي - LCD',price:110,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hf07',name:'كاشف غاز الطهي LPG/NG',desc:'يقطع الغاز تلقائياً عند الكشف',price:145,stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hf08',name:'حزمة حماية منزلية شاملة',desc:'كاشف دخان + طفاية + بطانية + إضاءة',price:285,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hf09',name:'ضمادة حروق 10×10سم',desc:'مبردة ومسكنة - 5 قطع - الإسعاف الأولي',price:35,stars:4,img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+    {id:'hf10',name:'خرطوم حريق منزلي 10م',desc:'مع فوهة + بكرة جدارية',price:185,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hf11',name:'علامات سلامة فسفورية',desc:'10 قطعة - تضيء في الظلام - ملصق',price:28,stars:4,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hf12',name:'حقيبة إخلاء طوارئ جاهزة',desc:'ماء + طعام + إضاءة + إسعافات - 72 ساعة',price:320,stars:5,img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+  
+    // الحمام والمطبخ
+        {id:'fk01',name:'كاشف دخان مطبخ بعيد الحساسية',desc:'لا ينذر من دخان الطهي العادي',price:72,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+        {id:'fk02',name:'طفاية مطبخ خاصة F-Class',desc:'لحرائق الزيوت - 2L - إلزامية',price:145,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'fk03',name:'حساس كشف غاز الطهي',desc:'يوقف الغاز تلقائياً - صوت+ضوء',price:155,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+        // الغرف
+        {id:'fr01',name:'كاشف دخان مزدوج أيوني+بصري',desc:'للغرف - إنذار مبكر أسرع 30%',price:85,stars:5,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+        {id:'fr02',name:'مصباح طوارئ بضوء دائم 8 ساعة',desc:'يتشغل فور انقطاع الكهرباء',price:78,stars:4,room:'الممر',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        {id:'fr03',name:'خزانة طوارئ منزلية مزودة',desc:'مصباح + مياه + إسعافات + صافرة',price:185,stars:5,room:'المدخل',img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+        {id:'fr04',name:'حبل نجاة من الطابق الثاني',desc:'5م - حمل 200kg - قابل للتخزين',price:145,stars:4,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+  ],
+
+  civil: [
+    {id:'hc01',name:'إسمنت إصلاح سريع 5kg',desc:'يتصلب 15 دقيقة - قوة عالية',price:38,stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+    {id:'hc02',name:'سيليكون أبيض للمطبخ والحمام',desc:'مضاد للفطريات - مقاوم للحرارة',price:28,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hc03',name:'معجون إصلاح جدران 2kg',desc:'ناعم جداً - يقبل الدهان مباشرة',price:22,stars:4,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'hc04',name:'لاصق سيراميك ابيض 25kg',desc:'مقاوم للماء والحرارة - للحمامات',price:58,stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+    {id:'hc05',name:'دهان مضاد للرطوبة 4L',desc:'للحمامات والمطابخ - قابل للغسيل',price:88,stars:5,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'hc06',name:'فيوجة رخامية بيضاء 2kg',desc:'مقاومة للبكتيريا - ملمس ناعم',price:22,stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+    {id:'hc07',name:'رغوة بولي يوريثان 750ml',desc:'للعزل وسد الشقوق والفتحات',price:45,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hc08',name:'شريط قياس ليزر 40م',desc:'دقة ±2مم - ذاكرة 20 قياس',price:155,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'hc09',name:'بايمر أساس للجدران 4L',desc:'للخشب والحديد والخرسانة',price:65,stars:4,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'hc10',name:'مسامير ميلاين مع رواسيم 200قطعة',desc:'أحجام متنوعة في علبة منظمة',price:35,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hc11',name:'إيبوكسي هيكلي ثنائي المكون',desc:'للإصلاحات القوية - يتحمل 300kg/cm²',price:55,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hc12',name:'طلاء حديد مضاد للصدأ 1L',desc:'حماية 10 سنوات - أسود/رمادي/بني',price:42,stars:4,img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=70'},
+    {id:'hc13',name:'لوح جبس بورد 120×240',desc:'سماكة 12.5مم - للأسقف والجدران',price:28,stars:4,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'hc14',name:'شبكة فايبر جلاس للتشقق',desc:'5×5مم - 1×50م - للطلاء المسلح',price:38,stars:4,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+  
+    // الغرف
+        {id:'cr01',name:'باركيه خشبي للغرف 1م²',desc:'سميك 12مم - نقر وريشة - ضد الرطوبة',price:65,stars:4,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'cr02',name:'موكيت للغرف 4م × 3م',desc:'سميك 10مم - ناعم - مضاد للبكتيريا',price:245,stars:4,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        {id:'cr03',name:'ورق جدران تركي 10م',desc:'مقاوم للرطوبة - سهل التركيب',price:85,stars:4,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+        // الحمام
+        {id:'cb01',name:'بلاط حمام أبيض مطفأ 30×60',desc:'1م² - مضاد للانزلاق - مقاوم الرطوبة',price:42,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'cb02',name:'لوح سقف PVC للحمام 20×20',desc:'مقاوم للرطوبة والعفن - سهل التركيب',price:28,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=70'},
+        {id:'cb03',name:'عازل مائي للحمام 10م²',desc:'للجدران والأرضيات - يدوم 20 سنة',price:75,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+        // المطبخ
+        {id:'ck01',name:'سيراميك مطبخ مضاد للدهون',desc:'60×60سم - سطح نانو - سهل التنظيف',price:55,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'ck02',name:'كاونتر مطبخ جرانيت 1م²',desc:'سماكة 3سم - حجر طبيعي',price:185,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        // الصالة
+        {id:'cs01',name:'سيراميك صالة 60×60 رمادي',desc:'بريق عالي - مضاد للانزلاق',price:48,stars:4,room:'الصالة',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+        {id:'cs02',name:'ألواح خشب الحائط 3D',desc:'PVC - 10 قطع تغطي 2.5م²',price:95,stars:4,room:'الصالة',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+  ],
+
+  elv: [
+    {id:'hl01',name:'كاميرا مراقبة WiFi داخلية 4MP',desc:'رؤية ليلية 10م - تتبع تلقائي - تطبيق',price:195,stars:5,img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+    {id:'hl02',name:'كاميرا مراقبة خارجية IP66',desc:'4K - رؤية ليلية 30م - مقاومة الطقس',price:285,stars:5,img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+    {id:'hl03',name:'جرس باب ذكي بكاميرا HD',desc:'WiFi - محادثة مباشرة - كشف حركة',price:275,stars:4,img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+    {id:'hl04',name:'راوتر Mesh WiFi 6 نقطتان',desc:'تغطية 300م² - 150 جهاز متزامن',price:485,stars:5,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70'},
+    {id:'hl05',name:'مكبر إشارة WiFi 1200Mbps',desc:'ثنائي النطاق - يغطي 120م²',price:95,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hl06',name:'قفل باب ذكي بالبصمة + PIN',desc:'بصمة + رمز + بطاقة NFC + مفتاح طوارئ',price:485,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hl07',name:'مستشعر باب ونافذة WiFi',desc:'إشعار لحظي + تاريخ الفتح والإغلاق',price:58,stars:4,img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+    {id:'hl08',name:'مقبس ذكي WiFi مع مراقبة طاقة',desc:'جدولة + تتبع الاستهلاك اليومي',price:72,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'hl09',name:'نظام إنذار منزلي لاسلكي',desc:'تطبيق + سيرين 110dB + 6 مستشعرات',price:380,stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hl10',name:'مفتاح ذكي 2 جناح WiFi',desc:'يستبدل المفتاح العادي - لا يحتاج تمديد',price:88,stars:4,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'hl11',name:'سماعة بلوتوث مضادة للماء IP67',desc:'بطارية 24 ساعة - صوت 360°',price:185,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hl12',name:'شاشة مراقبة منزلية 7 بوصة',desc:'لنظام الاتصال الداخلي - لمس',price:320,stars:4,img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+    {id:'hl13',name:'USB Hub 7 منافذ USB 3.0',desc:'شحن + نقل بيانات 5Gbps',price:65,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+  
+    // غرفة النوم
+        {id:'lr01',name:'ستارة ذكية كهربائية',desc:'تفتح وتغلق بالهاتف أو صوت',price:485,stars:5,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'lr02',name:'مكبر صوت بلوتوث ذكي',desc:'مساعد صوتي - ضوء LED محيطي',price:185,stars:5,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        // الصالة
+        {id:'ls01',name:'نظام صوت منزلي 5.1',desc:'مكبرات + مضخم - 400W - بلوتوث',price:1250,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+        {id:'ls02',name:'شاشة عرض سينما منزلية 120 بوصة',desc:'4K - مثبتة سقف - 3000 lumen',price:1850,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+        {id:'ls03',name:'Apple TV 4K الجيل الثالث',desc:'WiFi 6 - Dolby Atmos - Siri',price:485,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        // الأمن
+        {id:'lsec1',name:'نظام إنذار منزلي لاسلكي شامل',desc:'8 مستشعرات + لوحة + سيرين 110dB',price:485,stars:5,room:'المنزل كامل',img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+        {id:'lsec2',name:'كاميرا داخلية 360° بالذكاء الاصطناعي',desc:'يميز الأشخاص والحيوانات والأجسام',price:285,stars:5,room:'الصالة',img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+  ],
+
+  elev: [
+    {id:'hm01',name:'حساس باب تلقائي منزلي',desc:'للأبواب المنزلية - زاوية 180°',price:88,stars:4,img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=300&q=70'},
+    {id:'hm02',name:'غلاق باب هيدروليكي فاخر',desc:'إغلاق هادئ - قابل للضبط - ألمنيوم',price:135,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hm03',name:'سلم ألمنيوم قابل للطي 3.5م',desc:'حمل 150kg - خطوات مطاطية واسعة',price:295,stars:5,img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=70'},
+    {id:'hm04',name:'بكرات نقل أثاث 200kg/قطعة',desc:'4 قطع - قاعدة مطاطية لا تخدش',price:48,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hm05',name:'ستوبر باب أرضي من الستانلس',desc:'تصميم أنيق - يثبت الباب مفتوحاً',price:22,stars:5,img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=300&q=70'},
+    {id:'hm06',name:'حامل شاشة تلفاز دوار 32-75',desc:'دوران 360° + ميلان - VESA 400×400',price:145,stars:5,img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=300&q=70'},
+    {id:'hm07',name:'رافعة أثاث هيدروليكية 500kg',desc:'لنقل الأثاث الثقيل بسهولة',price:245,stars:4,img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=70'},
+    {id:'hm08',name:'طقم مفصلات باب أمريكي 3قطع',desc:'ستانلس صلب - ناعمة الحركة',price:55,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hm09',name:'مشد أسلاك منظم للأجهزة',desc:'شريط لاصق 3م - يخفي 20 سلك',price:28,stars:4,img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=70'},
+    {id:'hm10',name:'قفل أمان للأطفال للنوافذ',desc:'يمنع فتح النافذة أكثر من 10سم',price:32,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+  ],
+
+  garden: [
+    {id:'hg01',name:'خرطوم ري مرن مضاد للتشابك 20م',desc:'مع فوهة 8 أنماط + موصل سريع',price:72,stars:5,img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+    {id:'hg02',name:'رشاش دوار للحديقة تغطية 8م',desc:'ضبط زاوية الرش 0-360° - نحاس',price:38,stars:4,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+    {id:'hg03',name:'نظام ري قطرة لـ 50 نبتة',desc:'كامل مع خرطوم + قواطع + ساعة',price:185,stars:5,img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+    {id:'hg04',name:'تربة زراعية مخصبة 20L',desc:'لجميع أنواع النباتات المنزلية',price:30,stars:4,img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70'},
+    {id:'hg05',name:'سماد نباتات سائل مركز 500ml',desc:'NPK 20-20-20 - يكفي 3 أشهر',price:35,stars:5,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+    {id:'hg06',name:'طقم أدوات حديقة 7 قطع',desc:'مجرفة، شوكة، مقص، فرشاة، قواطع',price:105,stars:4,img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+    {id:'hg07',name:'مقص تشكيل أسجار احترافي',desc:'فولاذ ياباني - قبضة مريحة',price:65,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hg08',name:'أصيص ذكي مع مقياس رطوبة',desc:'مؤشر رطوبة - توزيع ماء ذاتي',price:82,stars:4,img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70'},
+    {id:'hg09',name:'مبيد حشرات عضوي آمن 500ml',desc:'طبيعي - آمن للأطفال والحيوانات',price:42,stars:4,img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+    {id:'hg10',name:'ضوء حديقة شمسي LED 6قطع',desc:'يشحن نهاراً ويضيء 8 ساعات',price:95,stars:5,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'hg11',name:'نافورة حديقة طاقة شمسية',desc:'3 أنماط رش - بلا أسلاك',price:145,stars:4,img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70'},
+    {id:'hg12',name:'ساعة ري تلقائية برمجية',desc:'حتى 16 مرة يومياً - مقاومة للماء',price:120,stars:5,img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+    {id:'hg13',name:'تسوير حديقة خشبي ديكوري',desc:'20 قطعة - 15سم - قابل للدهان',price:55,stars:4,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+  
+    // الحديقة الأمامية
+        {id:'gf01',name:'عشب صناعي 2م × 5م',desc:'كثيف 35مم - مقاوم UV - مقاوم للاستخدام',price:385,stars:5,room:'الحديقة الأمامية',img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+        {id:'gf02',name:'حافة تشكيل الحديقة بلاستيكية',desc:'5م × 10سم - تعيق نمو الحشائش',price:45,stars:4,room:'الحديقة',img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&q=70'},
+        {id:'gf03',name:'بلاط حجري للمسارات 40×40',desc:'حجر طبيعي - مضاد للانزلاق',price:35,stars:4,room:'المسارات',img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70'},
+        // الاستخدام اليومي
+        {id:'gd01',name:'آلة قص عشب 20V لاسلكية',desc:'عرض قص 33سم - حقيبة جمع',price:485,stars:5,room:'الحديقة',img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+        {id:'gd02',name:'مضخة سقي مدمجة للحديقة',desc:'تعمل مع خزان - مع فلتر',price:185,stars:4,room:'الحديقة',img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+        {id:'gd03',name:'بيت نباتات زجاجي صغير',desc:'للشتلات - 60×40×40سم',price:145,stars:4,room:'الحديقة',img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70'},
+        // الديكور
+        {id:'gdec1',name:'شلال حديقة صخري مع ضخ',desc:'220V - صوت مياه مريح - LED',price:385,stars:5,room:'الحديقة',img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70'},
+        {id:'gdec2',name:'مظلة حديقة خيزران 3م',desc:'مقاومة للرياح - طوي سهل',price:285,stars:4,room:'الحديقة',img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+  ],
+
+  parking: [
+    {id:'hpk01',name:'مرآة زاوية عمياء 45سم',desc:'للجراج والمدخل - مقاومة للصدأ',price:88,stars:4,img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70'},
+    {id:'hpk02',name:'حاجز موقف سيارة مطاطي',desc:'أحمر/أصفر عاكس - مسمار تثبيت',price:48,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hpk03',name:'ضوء LED جراج 100W',desc:'220V - تركيب مباشر - ضوء نهاري',price:72,stars:5,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+    {id:'hpk04',name:'طلاء أرضية جراج إيبوكسي 4L',desc:'يكفي 20م² - مقاوم للزيوت والمياه',price:125,stars:4,img:'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=300&q=70'},
+    {id:'hpk05',name:'ماسح إطارات مطاط 60×40سم',desc:'يمنع دخول الطين للمنزل',price:58,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hpk06',name:'حساس حركة LED 100W',desc:'يضيء لحظة الاقتراب - IP65',price:98,stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hpk07',name:'كاميرا خلفية للسيارة',desc:'160° - رؤية ليلية - لاسلكية',price:145,stars:4,img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=300&q=70'},
+    {id:'hpk08',name:'منظم كابلات شاحن السيارة',desc:'بكرة لف تلقائي - 5م',price:55,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hpk09',name:'شاحن سيارة كهربائية 7kW',desc:'220V - Type 2 - حماية شاملة',price:1250,stars:5,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'hpk10',name:'ضاغط هواء للإطارات 12V',desc:'لاسلكي - يشحن بالسيارة - رقمي',price:95,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hpk11',name:'فرشاة تنظيف سيارة كهربائية',desc:'تدور 1000 دورة/دقيقة - لاسلكية',price:145,stars:4,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+  ],
+
+  clean: [
+    {id:'hcl01',name:'مكنسة كهربائية لاسلكية 21kPa',desc:'بطارية 45 دقيقة - عدة فوهات',price:385,stars:5,img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70'},
+    {id:'hcl02',name:'ممسحة بخار كهربائية 1500W',desc:'حرارة 120°C - تقضي 99.9% جراثيم',price:225,stars:4,img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70'},
+    {id:'hcl03',name:'جهاز تنظيف بالبخار الضاغط',desc:'لتنظيف المفروشات والسجاد',price:485,stars:5,img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70'},
+    {id:'hcl04',name:'منظف متعدد الأغراض مركز 2L',desc:'للمطبخ والحمام - رائحة ليمون',price:28,stars:4,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hcl05',name:'مزيل حجر وصدأ للحمام 1L',desc:'فعّال خلال 10 دقائق',price:32,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hcl06',name:'صابون يد رغوي 5L - إعادة تعبئة',desc:'مضاد للبكتيريا - مرطب للجلد',price:45,stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hcl07',name:'أكياس قمامة 120L 20 قطعة',desc:'سميكة مقاومة للتمزق والروائح',price:28,stars:4,img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70'},
+    {id:'hcl08',name:'مطهر فلور مركز 5L',desc:'يقضي على 99.99% الجراثيم',price:38,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hcl09',name:'لوح مايكروفايبر عبوة 20 قطعة',desc:'للأسطح والزجاج والشاشات',price:42,stars:4,img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70'},
+    {id:'hcl10',name:'مستشعر إضاءة دورة مياه ذكي',desc:'يضيء لحظة الدخول - يطفئ بعد المغادرة',price:85,stars:4,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hcl11',name:'معطر هواء ذكي WiFi',desc:'جدولة من الهاتف - 60 يوم',price:78,stars:5,img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+    {id:'hcl12',name:'مكنسة يدوية صغيرة 120W',desc:'لتنظيف الأريكة والسيارة',price:88,stars:4,img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70'},
+    {id:'hcl13',name:'ممسحة دلو بدواسة للضغط',desc:'لفات قطنية قابلة للاستبدال',price:65,stars:4,img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70'},
+  
+    // الحمام
+        {id:'clb01',name:'موزع صابون أتوماتيك',desc:'بدون لمس - 250ml - بطارية',price:58,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+        {id:'clb02',name:'منظف مرحاض حبة أزرق',desc:'4 حبات - رغوة + تعقيم - شهرين',price:18,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+        {id:'clb03',name:'مزيل تكلس حمام قوي 1L',desc:'يذيب التكلس الصعب في 10 دقائق',price:28,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+        // المطبخ
+        {id:'clk01',name:'سائل غسيل أطباق مركز 5L',desc:'يزيل الدهون - يغطي 100 غسلة',price:38,stars:4,room:'المطبخ',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+        {id:'clk02',name:'منظف فرن وشواية قوي',desc:'بخاخ 500ml - يذيب الدهون المحروقة',price:32,stars:5,room:'المطبخ',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+        {id:'clk03',name:'منظف غسالة أطباق شهري',desc:'يزيل الكلس والروائح',price:22,stars:4,room:'المطبخ',img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&q=70'},
+        // الصالة والغرف
+        {id:'cls01',name:'رذاذ معطر بخاخ للسجاد',desc:'يزيل البقع والروائح - 500ml',price:28,stars:4,room:'الصالة',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+        {id:'cls02',name:'حبة معطر هواء كهربائي',desc:'3000 ساعة - 5 روائح متاحة',price:25,stars:5,room:'الغرف',img:'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=300&q=70'},
+  ],
+
+  tools: [
+    {id:'ht01',name:'طقم أدوات منزلي 108 قطعة',desc:'في حقيبة منظمة - كومبو كامل',price:188,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'ht02',name:'دريل كهربائي لاسلكي 20V',desc:'وظائف 3-في-1 + بطاريتان',price:285,stars:5,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'ht03',name:'جلخة زاوية 125مم 850W',desc:'للقطع والطحن والتلميع',price:145,stars:4,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'ht04',name:'ميزان ليزر ذاتي التسوية 3 خطوط',desc:'مع حامل + دقة ±0.2مم/م',price:185,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'ht05',name:'شريط قياس 5م قفل مزدوج',desc:'طرف مغناطيسي - عرض 25مم',price:32,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'ht06',name:'مسدس سيليكون كهربائي 60W',desc:'مع 30 عصا شفافة + ملونة',price:52,stars:5,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'ht07',name:'منشار كهربائي صابر 750W',desc:'للخشب والمعادن والبلاستيك',price:225,stars:4,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'ht08',name:'ملتيمتر رقمي احترافي',desc:'AC/DC - بروب حرارة - حقيبة',price:95,stars:5,img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=70'},
+    {id:'ht09',name:'طقم مفاتيح ربط 40 قطعة',desc:'1/4" + 3/8" + 1/2" - CRV',price:138,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'ht10',name:'ضاغط هواء صغير 24L 1.5HP',desc:'صامت - ضغط 8bar - سريع الشحن',price:485,stars:4,img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+    {id:'ht11',name:'علبة تنظيم أدوات 3 طوابق',desc:'شفافة - 48 حجرة - مع حمالة',price:55,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'ht12',name:'سلك تمرير كابلات 20م',desc:'مع رأس مرونة - للجدران والأسقف',price:38,stars:4,img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=70'},
+    {id:'ht13',name:'طقم مفكات براغي 32 قطعة',desc:'مغناطيسية - بيتات متنوعة',price:78,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'ht14',name:'كشاف LED قابل للشحن 20W',desc:'يدوم 6 ساعة - مقاوم للصدمات',price:65,stars:4,img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=70'},
+  
+    // الغرف
+        {id:'tor01',name:'مثقاب جداري للتابلوه',desc:'دريل + بيتات + بدلة + خطاف',price:32,stars:4,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'tor02',name:'طقم تركيب شاشة تلفاز',desc:'مفكات + مفاتيح + ورنية - 20 قطعة',price:45,stars:4,room:'الصالة',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        // المطبخ
+        {id:'tok01',name:'طقم أدوات تركيب مطبخ',desc:'شنيور، مفتاح، قاطعة بلاط',price:85,stars:4,room:'المطبخ',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'tok02',name:'مثقب بلاط وسيراميك',desc:'دريل + بيتات ماسية - بدون صدم',price:55,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=300&q=70'},
+        // الحديقة
+        {id:'tog01',name:'طقم أدوات ري وزراعة',desc:'14 قطعة ألمنيوم - مع حقيبة',price:95,stars:4,room:'الحديقة',img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70'},
+        // العام
+        {id:'tog02',name:'منظم أدوات مغناطيسي للجدار',desc:'60سم - يحمل 5kg - تركيب بمسمارين',price:48,stars:5,room:'المخزن',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'tog03',name:'حقيبة أدوات كانفاس 18 جيب',desc:'متينة - تحمل 15kg - مريحة',price:65,stars:5,room:'المخزن',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+  ],
+
+  safety: [
+    {id:'hs01',name:'طقم إسعافات أولية منزلي',desc:'55 قطعة في حقيبة - مواصفات WHO',price:88,stars:5,img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+    {id:'hs02',name:'كاشف دخان وحريق 10 سنوات',desc:'إنذار مبكر 85dB - بطارية طويلة',price:58,stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hs03',name:'حزمة طوارئ سيارة شاملة',desc:'حبال شحن + مثلث + مصباح + كشاف',price:145,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hs04',name:'مانع تسلق أطفال للدرج',desc:'قابل للضبط 76-82سم - تركيب بدون تلف',price:72,stars:4,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hs05',name:'قفازات عمل مضادة للقطع درجة 5',desc:'مقاومة للحرارة حتى 250°C',price:32,stars:4,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hs06',name:'نظارة حماية شفافة مضادة للضباب',desc:'مقاومة للخدش - ANSI Z87.1',price:22,stars:5,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hs07',name:'كمامة KN95 علبة 20 قطعة',desc:'فلترة 95% - 4 طبقات - مريحة',price:42,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hs08',name:'أدوات CPR إنعاش للطوارئ',desc:'قناع + قفازات + تعليمات مصورة',price:55,stars:5,img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+    {id:'hs09',name:'حقيبة إخلاء طوارئ 72 ساعة',desc:'ماء + طعام + إسعافات + راديو + إضاءة',price:335,stars:5,img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+    {id:'hs10',name:'جهاز قياس الضغط والسكر',desc:'جهازان في واحد - ذاكرة 90 قراءة',price:185,stars:4,img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+    {id:'hs11',name:'خزانة إسعافات جدارية',desc:'فولاذ - مع مفتاح - علامات واضحة',price:145,stars:5,img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+    {id:'hs12',name:'حزام ظهر للعمل اليدوي',desc:'دعم قطني + ضغط قابل للضبط',price:78,stars:4,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+    {id:'hs13',name:'واقي سمع للضوضاء 28dB',desc:'قابل للضبط - مريح للاستخدام الطويل',price:28,stars:4,img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+  
+    // الحمام
+        {id:'sb01',name:'مقبض أمان حمام للمسنين',desc:'304 ستانلس - حمل 150kg - 40سم',price:78,stars:5,room:'الحمام',img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+        {id:'sb02',name:'وسادة مانعة انزلاق الحمام',desc:'60×40سم - مصاصات قوية',price:38,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'sb03',name:'حاجز أمان مرحاض للأطفال',desc:'بلاستيك ناعم - يمنع السقوط',price:28,stars:4,room:'الحمام',img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70'},
+        // الأطفال
+        {id:'sc01',name:'طقم حماية أطفال شامل 12 قطعة',desc:'غطاء برايز + حواف + أقفال',price:65,stars:5,room:'منزل الأطفال',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        {id:'sc02',name:'حاجز درج للأطفال',desc:'71-82سم - دون تلف الجدار',price:78,stars:5,room:'الدرج',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=70'},
+        // الطوارئ
+        {id:'se01',name:'جهاز AED منزلي نصف أوتوماتيك',desc:'يرشدك بالصوت خطوة بخطوة',price:2850,stars:5,room:'المنزل كامل',img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+        {id:'se02',name:'سرير مسنين كهربائي طبي',desc:'4 مواضع - ريموت كنترول',price:3850,stars:5,room:'غرفة نوم',img:'https://images.unsplash.com/photo-1584982751601-97ddc0501b0e?w=300&q=70'},
+  ],
+};

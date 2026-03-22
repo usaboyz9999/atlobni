@@ -50,7 +50,7 @@ function OrderDetail({ order, onBack }) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#EEF2F7' }}>
+    <View style={{ flex: 1, backgroundColor: theme.bg || '#EEF2F7' }}>
       {/* رأس */}
       <View style={{ backgroundColor: '#0A2463', paddingTop: 12, paddingBottom: 16, paddingHorizontal: 16 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 10 }}>
@@ -90,7 +90,7 @@ function OrderDetail({ order, onBack }) {
             <InfoRow label="التاريخ"  value={order.date} />
             {order.desc ? <View style={{ marginTop: 8 }}>
               <Text style={{ fontSize: 10, color: '#6B7C93', textAlign: 'right', marginBottom: 4 }}>الوصف</Text>
-              <Text style={{ fontSize: 12, color: '#0D1B2A', textAlign: 'right', lineHeight: 18 }}>{order.desc}</Text>
+              <Text style={{ fontSize: 12, color: theme.text2 || '#0D1B2A', textAlign: 'right', lineHeight: 18 }}>{order.desc}</Text>
             </View> : null}
           </Section>
 
@@ -125,7 +125,7 @@ function OrderDetail({ order, onBack }) {
                       borderBottomColor: '#F4F7FB',
                     }}>
                       <View style={{ flex: 1 }}>
-                        <Text style={{ fontSize: 11, fontWeight: '600', color: '#0D1B2A', textAlign: 'right' }}>
+                        <Text style={{ fontSize: 11, fontWeight: '600', color: theme.text2 || '#0D1B2A', textAlign: 'right' }}>
                           {item.title}
                         </Text>
                         <Text style={{ fontSize: 9, color: '#6B7C93', textAlign: 'right', marginTop: 1 }}>
@@ -155,7 +155,7 @@ function OrderDetail({ order, onBack }) {
                   borderBottomWidth: i < spareParts.length - 1 ? 1 : 0,
                   borderBottomColor: '#F4F7FB',
                 }}>
-                  <Text style={{ fontSize: 11, color: '#0D1B2A', textAlign: 'right', flex: 1 }}>{part}</Text>
+                  <Text style={{ fontSize: 11, color: theme.text2 || '#0D1B2A', textAlign: 'right', flex: 1 }}>{part}</Text>
                   <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: '#0A7A3C' }} />
                 </View>
               ))}
@@ -165,7 +165,7 @@ function OrderDetail({ order, onBack }) {
           {/* طلب بدون قطع غيار */}
           {order.withParts === false && (
             <View style={{
-              backgroundColor: '#EEF2F7', borderRadius: 12, padding: 12,
+              backgroundColor: theme.bg || '#EEF2F7', borderRadius: 12, padding: 12,
               flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', gap: 8, marginBottom: 12,
             }}>
               <Text style={{ fontSize: 11, color: '#6B7C93' }}>طلب بدون قطع غيار</Text>

@@ -118,10 +118,10 @@ function CorrectiveList({ items, color }) {
           borderWidth: 1, borderColor: '#DDE4EF',
           borderRightWidth: 4, borderRightColor: color,
         }}>
-          <Text style={{ fontSize: 12, fontWeight: '700', color: '#0A2463', textAlign: 'right', marginBottom: 4 }}>
+          <Text style={{ fontSize: 14, fontWeight: '700', color: '#0A2463', textAlign: 'right', marginBottom: 4 }}>
             {item.task}
           </Text>
-          <Text style={{ fontSize: 10, color: '#6B7C93', textAlign: 'right', lineHeight: 16 }}>
+          <Text style={{ fontSize: 13, color: '#6B7C93', textAlign: 'right', lineHeight: 16 }}>
             {item.desc}
           </Text>
         </View>
@@ -633,7 +633,7 @@ export default function ProgramsScreen() {
       >
         <View style={{
           flex: 1,
-          backgroundColor: 'rgba(10,36,99,0.45)',
+          backgroundColor: 'rgba(10,36,99,0.28)',
           justifyContent: 'flex-end',
           paddingHorizontal: 20,
           paddingBottom: 20,
@@ -646,14 +646,14 @@ export default function ProgramsScreen() {
             borderWidth: 1, borderColor: 'rgba(255,255,255,0.25)',
             marginBottom: 10,
           }}>
-            <Text style={{ color: '#fff', fontSize: 10, fontWeight: '700' }}>
+            <Text style={{ color: '#fff', fontSize: 13, fontWeight: '700' }}>
               📋 12 تخصص • 5 برامج
             </Text>
           </View>
           <Text style={{ color: '#fff', fontSize: 20, fontWeight: '900', textAlign: 'right', marginBottom: 4 }}>
             برامج الصيانة
           </Text>
-          <Text style={{ color: 'rgba(255,255,255,0.75)', fontSize: 11, textAlign: 'right' }}>
+          <Text style={{ color: 'rgba(255,255,255,0.75)', fontSize: 13, textAlign: 'right' }}>
             اختر التخصص أو البرنامج الزمني المناسب
           </Text>
         </View>
@@ -705,7 +705,7 @@ export default function ProgramsScreen() {
               </View>
               {/* الاسم */}
               <Text style={{
-                fontSize: 11, fontWeight: '700', color: sp.color,
+                fontSize: 13, fontWeight: '700', color: sp.color,
                 textAlign: 'center',
               }}>{sp.label}</Text>
             </TouchableOpacity>

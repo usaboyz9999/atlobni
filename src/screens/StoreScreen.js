@@ -51,7 +51,7 @@ function ProductDetailScreen({ item, color, bg, onBack, onAddToCart }) {
         {/* overlay شفاف في الأسفل */}
         <View style={{
           position:'absolute', bottom:0, left:0, right:0, height:80,
-          backgroundColor:'rgba(10,36,99,0.45)',
+          backgroundColor:'rgba(10,36,99,0.28)',
           justifyContent:'flex-end', paddingHorizontal:16, paddingBottom:12,
         }}>
           <Text style={{ color:'#fff', fontSize:15, fontWeight:'900' }} numberOfLines={2}>
@@ -186,7 +186,7 @@ function ProductCard({ name, desc, img, price, color, bg, code, stars, onAdd, it
         shadowRadius: 5,
       }}>
       {/* صورة */}
-      <View style={{ height: 110, backgroundColor: bg || '#EEF2F7' }}>
+      <View style={{ height: 100, backgroundColor: bg || '#EEF2F7' }}>
         {img
           ? <Image source={{ uri: img }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
           : <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -242,10 +242,10 @@ function ProductCard({ name, desc, img, price, color, bg, code, stars, onAdd, it
             activeOpacity={0.85}
             style={{
               flex: 1, backgroundColor: color || '#0A2463',
-              borderRadius: 10, paddingVertical: 8, alignItems: 'center',
+              borderRadius: 10, paddingVertical: 10, alignItems: 'center',
             }}
           >
-            <Text style={{ color: '#fff', fontSize: 10, fontWeight: '700' }}>+ أضف للسلة</Text>
+            <Text style={{ color: '#fff', fontSize: 12, fontWeight: '700' }}>+ أضف للسلة</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -411,7 +411,7 @@ export default function StoreScreen({ onAddToCart, initialProduct, onClearInitia
                     <Image source={{ uri:sub.img }} style={{ width:'100%', height:'100%' }} resizeMode="cover" />
                     <View style={{
                       ...StyleSheet.absoluteFillObject,
-                      backgroundColor: on ? sub.color+'AA' : 'rgba(0,0,0,0.2)',
+                      backgroundColor: on ? sub.color+'AA' : 'rgba(0,0,0,0.12)',
                       alignItems:'center', justifyContent:'center',
                     }}>
                       {on && <Text style={{ color:'#fff', fontSize:20, fontWeight:'900' }}>✓</Text>}

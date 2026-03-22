@@ -103,7 +103,7 @@ export default function ProfileScreen({ cartCount, onGoOrders, onGoProduct }) {
                   flexDirection:'row', justifyContent:'space-between', alignItems:'center',
                   paddingVertical:8, borderBottomWidth:1, borderBottomColor:'#F4F7FB',
                 }}>
-                  <Text style={{ fontSize:12, color:'#0D1B2A', fontWeight:'600' }}>{val}</Text>
+                  <Text style={{ fontSize:12, color: theme.text2 || '#0D1B2A', fontWeight:'600' }}>{val}</Text>
                   <View style={{ flexDirection:'row', alignItems:'center', gap:6 }}>
                     <Text style={{ fontSize:11, color:'#6B7C93' }}>{label}</Text>
                     <Text style={{ fontSize:16 }}>{icon}</Text>
@@ -136,7 +136,7 @@ export default function ProfileScreen({ cartCount, onGoOrders, onGoProduct }) {
             {!purchases?.length ? (
               <View style={{ alignItems:'center', paddingVertical:60 }}>
                 <Text style={{ fontSize:50, marginBottom:12 }}>🛒</Text>
-                <Text style={{ fontSize:14, color:'#0A2463', fontWeight:'700', marginBottom:6 }}>لا توجد مشتريات</Text>
+                <Text style={{ fontSize:14, color: theme.text, fontWeight:'700', marginBottom:6 }}>لا توجد مشتريات</Text>
                 <Text style={{ fontSize:11, color:'#6B7C93' }}>اذهب للمتجر وابدأ التسوق</Text>
               </View>
             ) : purchases.map((p,i) => (
@@ -145,7 +145,7 @@ export default function ProfileScreen({ cartCount, onGoOrders, onGoProduct }) {
                 borderWidth:1, borderColor: theme.border, marginBottom:10,
                 flexDirection:'row', alignItems:'center', gap:12,
               }}>
-                <View style={{ width:52, height:52, borderRadius:12, backgroundColor:'#EEF2F7', overflow:'hidden' }}>
+                <View style={{ width:52, height:52, borderRadius:12, backgroundColor: theme.bg || '#EEF2F7', overflow:'hidden' }}>
                   {p.img
                     ? <Image source={{ uri:p.img }} style={{ width:'100%', height:'100%' }} resizeMode="cover" />
                     : <View style={{ flex:1, alignItems:'center', justifyContent:'center' }}>
@@ -178,7 +178,7 @@ export default function ProfileScreen({ cartCount, onGoOrders, onGoProduct }) {
             {!wishlist?.length ? (
               <View style={{ alignItems:'center', paddingVertical:60 }}>
                 <Text style={{ fontSize:50, marginBottom:12 }}>❤️</Text>
-                <Text style={{ fontSize:14, color:'#0A2463', fontWeight:'700', marginBottom:6 }}>المفضلة فارغة</Text>
+                <Text style={{ fontSize:14, color: theme.text, fontWeight:'700', marginBottom:6 }}>المفضلة فارغة</Text>
                 <Text style={{ fontSize:11, color:'#6B7C93', textAlign:'center', lineHeight:18 }}>
                   اضغط على ❤️ بجانب أي منتج{'\n'}في المتجر لإضافته للمفضلة
                 </Text>

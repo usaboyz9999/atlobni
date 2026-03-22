@@ -21,7 +21,7 @@ export default function BottomNav({active,onPress,cartCount}){
     </TouchableOpacity>
   );
   return(
-    <View style={[s.bottomNavWrapper,{backgroundColor:theme.navBg}]}>
+    <View style={[s.bottomNavWrapper,{backgroundColor:theme.navBg,borderTopColor:theme.border}]}>
       <View style={[s.bottomNav,{backgroundColor:theme.navBg,borderTopColor:theme.border}]}>
         {leftTabs.map(renderTab)}
         {/* FAB placeholder slot */}

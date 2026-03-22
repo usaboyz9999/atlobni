@@ -3,7 +3,7 @@ import {
   View, Text, ScrollView, TouchableOpacity,
   TextInput, Modal, Alert, Image,
 } from 'react-native';
-import s from '../styles';
+import s, { SAFE_BOTTOM } from '../styles';
 import { DETAIL_DATA } from '../data/detailData';
 import { SPARE_PARTS_MAP } from '../data/sparePartsData';
 
@@ -84,6 +84,7 @@ function SectionHeader({ title, count, color }) {
   );
 }
 
+// theme applied inside
 export default function NewOrderModal({ visible, onClose, onSubmit }) {
   const [title,     setTitle]     = useState('');
   const [desc,      setDesc]      = useState('');
@@ -165,7 +166,7 @@ export default function NewOrderModal({ visible, onClose, onSubmit }) {
   return (
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
       <View style={s.modalOverlay}>
-        <View style={[s.modalContainer, { maxHeight: '93%' }]}>
+        <View style={[s.modalContainer, { maxHeight: '93%', paddingBottom: 0 }]}>
 
           {/* رأس */}
           <View style={s.modalHeader}>
@@ -352,7 +353,7 @@ export default function NewOrderModal({ visible, onClose, onSubmit }) {
             <TouchableOpacity style={s.submitBtn} onPress={handleSubmit} activeOpacity={0.85}>
               <Text style={s.submitBtnTxt}>إرسال الطلب</Text>
             </TouchableOpacity>
-            <View style={{ height: 24 }} />
+            <View style={{ height: 24 + SAFE_BOTTOM }} />
           </ScrollView>
         </View>
       </View>

@@ -23,7 +23,7 @@ export default function CartScreen({ cart, onChangeQty, onOrder }) {
         source={{ uri: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=700&q=80' }}
         style={[s.detailHero, { height: 110 }]}
       >
-        <View style={[s.heroOverlay, { backgroundColor: 'rgba(10,36,99,0.82)' }]} />
+        <View style={[s.heroOverlay, { backgroundColor: 'rgba(10,36,99,0.35)' }]} />
         <View style={s.detailContent}>
           <Text style={s.detailTitle}>سلة التسوق</Text>
           <Text style={s.detailSub}>{totalQty} منتجات</Text>

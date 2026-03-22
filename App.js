@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, Text, StatusBar, BackHandler, Alert, Platform } from 'react-native';
+import { SAFE_BOTTOM } from './src/styles';
 import { LangProvider } from './src/context/LangContext';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import { ThemeProvider, useTheme } from './src/context/ThemeContext';
@@ -52,6 +53,25 @@ function AppInner() {
     { title:'تغيير فلاتر التكييف',         category:'التكييف',  desc:'تغيير فلاتر G4 الأدوار 1-5', priority:'عالي', assign:'محمد حسن',     status:'done',       date:'١٤٤٦/٠٨/٢٨' },
   ]);
   const [pendingProduct, setPendingProduct] = useState(null);
+
+  // ─── زر الرجوع في الهاتف ────────────────────────────────────
+  React.useEffect(() => {
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (screen === 'home') {
+        Alert.alert('الخروج من التطبيق', 'هل أنت متأكد من الخروج؟', [
+          { text: 'إلغاء', style: 'cancel' },
+          { text: 'خروج', style: 'destructive', onPress: () => BackHandler.exitApp() },
+        ]);
+        return true;
+      }
+      if (prevScreen && screen !== prevScreen) {
+        setScreen(prevScreen);
+        return true;
+      }
+      return false;
+    });
+    return () => sub.remove();
+  }, [screen, prevScreen]);
 
   // إذا Splash → شاشة الاقلاع
   if (splash) return <SplashScreen onDone={() => setSplash(false)} />;
@@ -120,10 +140,11 @@ function AppInner() {
     setPrev('orders');
   }
 
+
   const activeTab = ['home','programs','store','profile'].includes(screen) ? screen : prevScreen;
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.bg }}>
+    <View style={{ flex: 1, backgroundColor: theme.bg, paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 0) : 0 }}>
       <StatusBar barStyle="light-content" backgroundColor={theme.header} />
 
       {/* CartBar المتحركة فوق الشاشة */}

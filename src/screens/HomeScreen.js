@@ -2,10 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   View, Text, ScrollView, TouchableOpacity, ImageBackground,
   TextInput, KeyboardAvoidingView, Platform, Keyboard, Alert,
-  Dimensions, Animated, Easing,
+  Dimensions, Animated, Easing, StatusBar as RNStatusBar, PanResponder,
 } from 'react-native';
 import { useLang } from '../context/LangContext';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import { Badge, SHead } from '../components/shared';
 import s, { CARD_W } from '../styles';
 import { CATEGORIES } from '../data/categories';
@@ -13,7 +14,7 @@ import { STORE_ITEMS, HOME_PRODUCTS } from '../data/storeData';
 import UserBar from '../components/UserBar';
 
 // ─── اسم المستخدم المسجل (null = غير مسجل) ─────────────────
-const LOGGED_IN_USER = 'أحمد المهندس';
+// LOGGED_IN_USER now comes from useAuth()
 
 const SCREEN_W      = Dimensions.get('window').width;
 const CARD_REVIEW_W = SCREEN_W * 0.72;
@@ -39,7 +40,7 @@ const BANNERS = [
   {
     id: 1,
     img: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=700&q=80',
-    overlay: 'rgba(10,36,99,0.42)',
+    overlay: 'rgba(10,36,99,0.25)',
     badge: '⚙️ دليل التشغيل',
     title: 'دليل الصيانة الشامل',
     desc: '14 تخصصاً في مكان واحد — إجراءات وقائية\nوتصحيحية مع جداول دورية معتمدة',
@@ -47,7 +48,7 @@ const BANNERS = [
   {
     id: 2,
     img: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=700&q=80',
-    overlay: 'rgba(120,30,0,0.42)',
+    overlay: 'rgba(120,30,0,0.28)',
     badge: '🛒 المتجر',
     title: 'متجر قطع الغيار',
     desc: '+600 قطعة غيار لجميع التخصصات\nتوصيل سريع • ضمان الجودة • أسعار تنافسية',
@@ -55,7 +56,7 @@ const BANNERS = [
   {
     id: 3,
     img: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=700&q=80',
-    overlay: 'rgba(10,90,50,0.42)',
+    overlay: 'rgba(10,90,50,0.28)',
     badge: '📋 البرامج',
     title: 'برامج الصيانة الذكية',
     desc: 'جداول يومية وأسبوعية وشهرية وسنوية\nمع تتبع الطلبات ومؤشرات الأداء KPIs',
@@ -76,6 +77,7 @@ function StarRow({ rating, size = 14, onPress }) {
 
 export default function HomeScreen({ onSelectCategory, onGoStore, onLogout, onProfile, onGoProduct }) {
   const { t, dir } = useLang();
+  const { user } = useAuth();
   const theme = useTheme();
   const isRTL = dir === 'rtl';
   const [filter, setFilter]       = useState('all');
@@ -83,13 +85,14 @@ export default function HomeScreen({ onSelectCategory, onGoStore, onLogout, onPr
   const [newRating, setNewRating] = useState(0);
   const [newText, setNewText]     = useState('');
   const [guestName, setGuestName] = useState('');
+  const [hasReviewed, setHasReviewed] = useState(false);
   const [activeDot, setActiveDot] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
   const scrollRef  = useRef(null);
 
-  const isLoggedIn  = !!LOGGED_IN_USER;
-  const displayName = isLoggedIn ? LOGGED_IN_USER : guestName.trim();
+  const isLoggedIn  = !!user;
+  const displayName = isLoggedIn ? user?.name : guestName.trim();
   const avgRating   = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
 
   // ─── نتائج البحث الشاملة ────────────────────────────────────
@@ -139,6 +142,18 @@ export default function HomeScreen({ onSelectCategory, onGoStore, onLogout, onPr
     setActiveDot(idx);
   };
 
+  // PanResponder للتحريك اليدوي للبانرات
+  const panResponder = useRef(PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponder: (_, gs) => Math.abs(gs.dx) > 8,
+    onPanResponderGrant: () => { isPaused.current = true; },
+    onPanResponderRelease: (_, gs) => {
+      if (gs.dx < -50) goToSlide((currentIdx.current + 1) % BANNERS_COUNT);
+      else if (gs.dx > 50) goToSlide((currentIdx.current - 1 + BANNERS_COUNT) % BANNERS_COUNT);
+      setTimeout(() => { isPaused.current = false; }, 3000);
+    },
+  })).current;
+
   useEffect(() => {
     const timer = setInterval(() => {
       if (isPaused.current) return;
@@ -166,7 +181,8 @@ export default function HomeScreen({ onSelectCategory, onGoStore, onLogout, onPr
   const filtered = filter === 'all' ? CATEGORIES : CATEGORIES.filter(c => c.id === filter);
 
   function submitReview() {
-    if (!isLoggedIn && !guestName.trim()) { Alert.alert('تنبيه', 'يرجى إدخال اسمك'); return; }
+    if (hasReviewed) { Alert.alert('شكراً!', 'لقد قمت بتقديم رأيك مسبقاً'); return; }
+    if (!user && !guestName.trim()) { Alert.alert('تنبيه', 'يرجى إدخال اسمك أولاً'); return; }
     if (newRating === 0)    { Alert.alert('تنبيه', 'يرجى اختيار تقييم بالنجوم'); return; }
     if (!newText.trim())    { Alert.alert('تنبيه', 'يرجى كتابة رأيك'); return; }
     setReviews(prev => [{ id: Date.now(), name: displayName, rating: newRating, text: newText.trim() }, ...prev]);
@@ -358,7 +374,7 @@ export default function HomeScreen({ onSelectCategory, onGoStore, onLogout, onPr
         {/* ══════════════════════════════════════════════
             البانرات الترويجية — Animated carousel
         ══════════════════════════════════════════════ */}
-        <View style={{ width: SCREEN_W, height: 160, overflow: 'hidden', marginTop: 6 }}>
+        <View style={{ width: SCREEN_W, height: 160, overflow: 'hidden', marginTop: 6 }} {...panResponder.panHandlers}>
           <Animated.View style={{
             flexDirection: 'row',
             width: SCREEN_W * BANNERS_COUNT,
@@ -623,7 +639,7 @@ export default function HomeScreen({ onSelectCategory, onGoStore, onLogout, onPr
                   }}>
                     <Text style={{ color: '#fff', fontSize: 9, fontWeight: '700' }}>مسجل ✓</Text>
                   </View>
-                  <Text style={{ fontSize: 12, fontWeight: '700', color: '#0A2463' }}>{LOGGED_IN_USER}</Text>
+                  <Text style={{ fontSize: 13, fontWeight: '700', color: '#0A2463' }}>{user?.name}</Text>
                 </View>
               ) : (
                 /* غير مسجل — حقل إدخال الاسم */

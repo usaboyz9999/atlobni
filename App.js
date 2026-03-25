@@ -14,8 +14,7 @@ import { AppAlertProvider, useAppAlert } from './src/components/AppAlert';
 import { PaymentProvider } from './src/context/PaymentContext';
 
 // ── Screens ──
-// ✅ تم تعليق استيراد شاشة الاقلاع لأننا لن نستخدمها حالياً
-// import SplashScreenComponent from './src/screens/SplashScreen'; 
+import SplashScreenComponent from './src/screens/SplashScreen'; // ✅ تم تغيير الاسم لتجنب التداخل
 import HomeScreen     from './src/screens/HomeScreen';
 import DetailScreen   from './src/screens/DetailScreen';
 import ProgramsScreen from './src/screens/ProgramsScreen';
@@ -33,9 +32,14 @@ import NewOrderModal from './src/components/NewOrderModal';
 import CartBar       from './src/components/CartBar';
 
 export default function App() {
-  // ✅ تم إزالة حالة isLoading وشاشة الاقلاع
-  // التطبيق يبدأ مباشرة بالمحتوى الرئيسي
-  
+  // ✅ حالة التحكم في شاشة الاقلاع
+  const [isLoading, setIsLoading] = useState(true);
+
+  // إذا كانت شاشة الاقلاع نشطة، اعرضها فقط
+  if (isLoading) {
+    return <SplashScreenComponent onFinish={() => setIsLoading(false)} />;
+  }
+
   return (
     <SafeAreaProvider>
       <LangProvider>

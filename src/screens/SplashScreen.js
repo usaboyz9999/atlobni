@@ -162,7 +162,7 @@ export default function SplashScreen({ onFinish }) {
 
       {/* التذييل */}
       <Animated.View style={[styles.footer, { opacity: screenFade }]}>
-        <Text style={styles.footerText}>جميع الحقوق محفوظة لشركة أطلبني © 2026</Text> 
+        <Text style={styles.footerText}>جميع الحقوق محفوظة © 2024</Text>
       </Animated.View>
     </Animated.View>
   );
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
   progressBarContainer: {
     width: '100%',
     height: 10,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
     borderRadius: 8,
     overflow: 'hidden',
     borderWidth: 1,

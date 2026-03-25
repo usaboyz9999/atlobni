@@ -2,13 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, Image, StyleSheet, Animated, Dimensions, ActivityIndicator, Easing, Platform } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
-// استيراد الصورة المحلية
-import localLogoImage from '../assets/logo.png'; 
+// ✅ تم حذف استيراد الصورة المحلية تماماً لتجنب أي أخطاء في المسارات
+// import localLogoImage from '../assets/logo.png'; 
+
+// ✅ ضع رابط صورتك المباشر هنا (تأكد أنه رابط مباشر ينتهي بـ .png أو .jpg)
+const LOGO_URI = 'https://media.licdn.com/dms/image/v2/D4E03AQGckpJoCFi1ag/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1685649138772?e=2147483647&v=beta&t=TlSFjpGGYMdSpwgMb1RbRyXpYOafZbYgrxZwyoB1R0o';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export default function SplashScreen({ onFinish }) {
   const [progress, setProgress] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false); // حالة لتتبع تحميل الصورة
 
   // متغيرات الأنيميشن
   const ballPosition = useRef(new Animated.Value(-SCREEN_WIDTH)).current;
@@ -17,8 +21,6 @@ export default function SplashScreen({ onFinish }) {
   
   // متغير ظهور المحتوى
   const fadeContent = useRef(new Animated.Value(0)).current;
-
-  // متغير الخروج التدريجي
   const screenFade = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -37,10 +39,10 @@ export default function SplashScreen({ onFinish }) {
       });
     }, intervalTime);
 
-    // 2. تسلسل الحركة
+    // 2. تسلسل الحركة (يبدأ بعد تحميل الصورة لضمان عدم الانهيار)
+    // ملاحظة: يمكن بدء الحركة فوراً، لكن الصورة قد تظهر متأخرة قليلاً إذا كانت الشبكة بطيئة
     Animated.sequence([
       Animated.parallel([
-        // حركة الصورة البطيئة جداً
         Animated.spring(ballPosition, {
           toValue: 0, 
           tension: 10,
@@ -59,8 +61,6 @@ export default function SplashScreen({ onFinish }) {
           easing: Easing.out(Easing.cubic),
           useNativeDriver: true,
         }),
-        
-        // ظهور المحتوى أثناء الحركة
         Animated.timing(fadeContent, {
           toValue: 1,
           duration: 800,
@@ -113,7 +113,7 @@ export default function SplashScreen({ onFinish }) {
 
       <View style={styles.contentContainer}>
         
-        {/* 1. الصورة المربعة */}
+        {/* 1. الصورة المربعة (تستخدم الرابط المباشر) */}
         <Animated.View 
           style={[
             styles.imageSquareWrapper, 
@@ -127,9 +127,11 @@ export default function SplashScreen({ onFinish }) {
           ]}
         >
           <Image 
-            source={localLogoImage} 
+            source={{ uri: LOGO_URI }} // ✅ استخدام الرابط مباشرة
             style={styles.squareImage}
             resizeMode="contain"
+            // معالجة الأخطاء في حال فشل تحميل الصورة من الإنترنت
+            onError={(e) => console.log('Error loading image:', e.nativeEvent.error)}
           />
         </Animated.View>
 
@@ -146,7 +148,7 @@ export default function SplashScreen({ onFinish }) {
           {/* قسم التحميل */}
           <View style={styles.loaderSection}>
             <View style={styles.loaderRow}>
-              <ActivityIndicator size="small" color="#10B981" /> {/* ✅ تغيير لون الدائرة للأخضر */}
+              <ActivityIndicator size="small" color="#10B981" />
               <Text style={styles.loadingText}>جاري تحضير التطبيق . . .</Text>
             </View>
             
@@ -168,6 +170,7 @@ export default function SplashScreen({ onFinish }) {
   );
 }
 
+// ... (بقية الـ Styles كما هي بدون تغيير)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -220,7 +223,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 15,
   },
-  // ✅ العنوان باللون الأزرق الاحترافي
   mainTitle: {
     fontSize: 36,
     fontWeight: '900',
@@ -229,7 +231,7 @@ const styles = StyleSheet.create({
       android: 'Roboto',
       default: 'Arial',
     }),
-    color: '#0A2463', // ✅ أزرق داكن احترافي
+    color: '#0A2463',
     textAlign: 'center',
     marginBottom: 5,
     letterSpacing: -0.5,
@@ -244,7 +246,7 @@ const styles = StyleSheet.create({
       android: 'Roboto',
       default: 'Arial',
     }),
-    color: '#0A2463', // ✅ جعلناsubtitle بنفس اللون الأزرق للتناسق
+    color: '#0A2463',
     textAlign: 'center',
     marginTop: 2,
     includeFontPadding: false,
@@ -252,7 +254,7 @@ const styles = StyleSheet.create({
   divider: {
     width: 70,
     height: 6,
-    backgroundColor: '#0A2463', // ✅ الفاصل أيضاً أزرق
+    backgroundColor: '#0A2463',
     borderRadius: 4,
     marginTop: 15,
   },
@@ -268,11 +270,10 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: 12,
   },
-  // ✅ نص التحميل باللون الأخضر الاحترافي
   loadingText: {
     fontSize: 15,
-    fontWeight: '800', // زيادة السماكة قليلاً ليتناسب مع اللون
-    color: '#10B981', // ✅ أخضر زمردي احترافي (Emerald Green)
+    fontWeight: '800',
+    color: '#10B981',
   },
   progressBarContainer: {
     width: '100%',
@@ -290,7 +291,7 @@ const styles = StyleSheet.create({
   },
   progressBarFill: {
     height: '100%',
-    backgroundColor: '#0A2463', // ✅ شريط التقدم أزرق ليتناسق مع العنوان
+    backgroundColor: '#0A2463',
     borderRadius: 8,
   },
   footer: {

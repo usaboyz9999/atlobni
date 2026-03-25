@@ -30,10 +30,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "atlobni",
+    "owner": "atlobni2",
     "extra": {
       "eas": {
-        "projectId": "5f0ccb12-873e-480d-97f9-e618bef7869c"
+        "projectId": "a75b7400-f4fc-4b7d-b52e-0cf6ae50beb2"
       }
     },
     "runtimeVersion": {
